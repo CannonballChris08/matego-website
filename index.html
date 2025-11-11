@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Matego – Mate neu gedacht</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Matego – die erste portable Mate-Maschine mit Kapselsystem. Heiß oder kalt, überall, jederzeit."
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0f172a;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.1);
+      --accent-strong: #16a34a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --danger: #ef4444;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.4);
+      --shadow-soft-sm: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .page {
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Header / Nav */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.85),
+        transparent
+      );
+      border-bottom: 1px solid rgba(31, 41, 55, 0.8);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      background: #fefce8;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.08rem;
+    }
+
+    .brand-name {
+      font-weight: 650;
+      letter-spacing: 0.04em;
+      font-size: 0.96rem;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 0.25rem 0;
+      position: relative;
+      color: var(--muted);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--accent), #a3e635);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: #f9fafb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(34, 197, 94, 0.6);
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.26), #022c22);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      box-shadow: 0 10px 24px rgba(22, 163, 74, 0.45);
+    }
+
+    .nav-cta:hover {
+      background: radial-gradient(circle at top, rgba(74, 222, 128, 0.42), #064e3b);
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Sections */
+
+    section {
+      padding: 3.5rem 0;
+    }
+
+    section:nth-of-type(odd) .section-inner {
+      background: radial-gradient(
+          circle at top left,
+          rgba(34, 197, 94, 0.12),
+          transparent 55%
+        ),
+        rgba(15, 23, 42, 0.92);
+    }
+
+    section:nth-of-type(even) .section-inner {
+      background: radial-gradient(
+          circle at top right,
+          rgba(34, 197, 94, 0.14),
+          transparent 55%
+        ),
+        rgba(15, 23, 42, 0.9);
+    }
+
+    .section-inner {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 2.4rem 1.8rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .section-header {
+      margin-bottom: 1.8rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .section-subtitle {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 34rem;
+    }
+
+    /* Hero */
+
+    #hero .section-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw + 1rem, 2.8rem);
+      line-height: 1.1;
+      margin: 0 0 0.9rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #bbf7d0, #4ade80, #a3e635);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.75rem 1.35rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #bbf7d0, #22c55e, #15803d);
+      color: #052e16;
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.6);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(75, 85, 99, 0.95);
+      color: var(--muted);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(148, 163, 184, 0.95);
+      color: #e5e7eb;
+    }
+
+    .hero-meta {
+      margin-top: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-photo-card {
+      border-radius: 26px;
+      background: radial-gradient(circle at top, #111827, #020617);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 1rem;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-photo-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-photo-caption {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-photo-caption strong {
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 880px) {
+      #hero .section-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Grid utility */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Cards, tables, pills */
+
+    .card {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.3rem 1.25rem;
+      box-shadow: var(--shadow-soft-sm);
+    }
+
+    .card + .card {
+      margin-top: 0.8rem;
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.35rem;
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin: 0.2rem 0 0.4rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .pill.accent {
+      border-color: rgba(34, 197, 94, 0.8);
+      background: rgba(22, 163, 74, 0.16);
+      color: #bbf7d0;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.4rem 0 0.4rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .info-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .info-list strong {
+      color: #e5e7eb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.6rem;
+    }
+
+    th,
+    td {
+      padding: 0.45rem 0.55rem;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.98);
+      position: sticky;
+      top: 0;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .table-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .price-highlight {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+
+    .price-highlight span {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-left: 0.25rem;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 820px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .form-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .form-field {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    label {
+      color: #e5e7eb;
+    }
+
+    input,
+    textarea {
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.98);
+      padding: 0.55rem 0.85rem;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    textarea {
+      border-radius: 16px;
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.4);
+    }
+
+    .contact-meta p {
+      margin: 0.15rem 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .contact-meta strong {
+      color: #e5e7eb;
+    }
+
+    .contact-meta a {
+      color: var(--accent);
+    }
+
+    /* Footer */
+
+    footer {
+      padding: 1.8rem 0 2.5rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    /* Utility */
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    .text-sm {
+      font-size: 0.85rem;
+    }
+
+    .mt-sm {
+      margin-top: 0.35rem;
+    }
+
+    .mt-md {
+      margin-top: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container">
+        <nav class="nav">
+          <div class="brand">
+            <img src="Matego_Logo.png" alt="Matego Logo" class="brand-logo-img" />
+            <div class="brand-text">
+              <span class="brand-name">Matego</span>
+              <span class="brand-tagline">Mate neu gedacht.</span>
+            </div>
+          </div>
+          <div class="nav-links">
+            <a href="#hero">Start</a>
+            <a href="#produkt">Produkt</a>
+            <a href="#firma">Firma</a>
+            <a href="#kalkulation">Preise</a>
+            <a href="#kontakt">Kontakt</a>
+            <a href="#impressum">Impressum</a>
+            <a href="#kontakt" class="nav-cta">Vorbestellen</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO / PRODUKTBESCHREIBUNG -->
+      <section id="hero">
+        <div class="container">
+          <div class="section-inner">
+            <div>
+              <div class="hero-kicker">Mechanischer Alltagsgegenstand</div>
+              <h1 class="hero-title">
+                Die erste portable
+                <span>Mate-Maschine</span>
+                mit Kapselsystem.
+              </h1>
+              <div class="hero-tagline">
+                <span></span>
+                Frisch gebrühter Mate – heiß oder kalt – überall und jederzeit.
+              </div>
+              <p class="hero-text">
+                Matego ist eine kompakte Mate-Maschine, die wie eine Kaffeemaschine
+                funktioniert: Kapsel einlegen, Wasser einfüllen, Knopf drücken.
+                In wenigen Sekunden fließt frisch gebrühter Mate ins Glas –
+                wahlweise heiß oder kalt. Perfekt für Menschen, die Mate lieben
+                und keine Zeit für umständliche Zubereitung haben.
+              </p>
+              <p class="hero-text">
+                <strong>Preis:</strong> CHF 129.– (Einführungspreis) – so kalkuliert,
+                dass sowohl Produktionskosten als auch ein fairer Gewinn abgedeckt
+                sind.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#kontakt" class="btn btn-primary">
+                  Jetzt vorbestellen
+                </a>
+                <a href="#kalkulation" class="btn btn-secondary">
+                  Preiskalkulation ansehen
+                </a>
+              </div>
+
+              <div class="hero-meta">
+                <div>
+                  <strong>Alleinstellungsmerkmal</strong>
+                  Erste Maschine speziell für Mate mit Warm-/Kalt-Funktion und
+                  nachhaltigen Kapseln.
+                </div>
+                <div>
+                  <strong>Nutzen im Alltag</strong>
+                  Kein Ladenbesuch, kein Ziehenlassen – einfach, schnell und
+                  überall einsetzbar.
+                </div>
+              </div>
+            </div>
+
+            <aside class="hero-visual">
+              <div class="hero-photo-card">
+                <div class="hero-photo-wrapper">
+                  <img
+                    src="Matego_Maschine.png"
+                    alt="Matego Mate-Maschine im Einsatz"
+                    class="hero-photo"
+                  />
+                </div>
+                <div class="hero-photo-caption">
+                  <span><strong>Matego One</strong> • Prototyp-Rendering der Maschine</span>
+                  <span>Perfekt für Büro, WG &amp; Unterwegs</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUKTDETAILS -->
+      <section id="produkt">
+        <div class="container">
+          <div class="section-inner">
+            <div class="section-header">
+              <div class="eyebrow">Produktdetails</div>
+              <h2 class="section-title">So funktioniert Matego.</h2>
+              <p class="section-subtitle">
+                Einfache Bedienung, klarer Mehrwert und nachhaltige Kapseln –
+                konstruiert wie eine Kaffeemaschine, optimiert für Mate.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <div class="card">
+                  <h3>Kernfunktion</h3>
+                  <p>
+                    Die Mate-Maschine funktioniert ähnlich wie eine Kaffeemaschine
+                    mit Kapselsystem:
+                  </p>
+                  <ul class="info-list">
+                    <li>Mate-Kapsel einlegen</li>
+                    <li>Wasser einfüllen (heiß oder kalt)</li>
+                    <li>Knopf drücken – Mate wird unter Druck extrahiert</li>
+                    <li>Getränk fließt direkt ins Glas</li>
+                    <li>Leere Kapsel fällt automatisch in den Auffangbehälter</li>
+                  </ul>
+                  <div class="pill-row">
+                    <span class="pill accent">Frisch</span>
+                    <span class="pill accent">Schnell</span>
+                    <span class="pill accent">Einfach</span>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <h3>Nutzen &amp; Problem, das gelöst wird</h3>
+                  <p>
+                    Viele Mate-Fans kennen das Problem: keine Zeit, keine
+                    Ausstattung oder keine Lust auf aufwendige Zubereitung.
+                  </p>
+                  <ul class="info-list">
+                    <li><strong>Unser Nutzenversprechen:</strong> Immer perfekten Mate auf Knopfdruck.</li>
+                    <li>Kein Wasserkocher, keine separate Gefäße, keine Ziehzeit.</li>
+                    <li>Eignet sich für Zuhause, Büro und Unterwegs.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <h3>Technische Daten &amp; Nachhaltigkeit</h3>
+                  <ul class="info-list">
+                    <li><strong>Gewicht:</strong> &lt; 10 kg</li>
+                    <li><strong>Leistung:</strong> max. 1800 W, 230 V</li>
+                    <li><strong>Energieeffizienz:</strong> Klasse A</li>
+                    <li><strong>Bedienung:</strong> One-Touch-Button für heiß/kalt</li>
+                    <li><strong>Reinigung:</strong> einfache Entnahme von Tank und Auffangbehälter</li>
+                  </ul>
+                  <p class="mt-sm">
+                    <strong>Nachhaltigkeit:</strong> Die Kapseln bestehen aus
+                    pflanzlichen Reststoffen und sind kompostierbar. Die
+                    Verpackung ist klimaneutral. Ein Rücknahmeprogramm sorgt
+                    dafür, dass Kapseln korrekt entsorgt werden.
+                  </p>
+                </div>
+
+                <div class="card">
+                  <h3>Unser Alleinstellungsmerkmal</h3>
+                  <p>
+                    Wir sind die ersten, die eine portable Mate-Maschine auf den
+                    Markt bringen, die auf Knopfdruck warmen oder kalten Mate
+                    zubereitet – mit eigenem Kapselsystem und Fokus auf
+                    Nachhaltigkeit.
+                  </p>
+                  <ul class="info-list">
+                    <li>Erste Maschine speziell für Mate</li>
+                    <li>Warm- und Kalt-Funktion integriert</li>
+                    <li>Eigenes Kapsel-Abo-Modell</li>
+                    <li>Nachhaltige Kapseln &amp; Verpackung</li>
+                  </ul>
+                  <span class="badge">
+                    <span class="badge-dot"></span>
+                    Klar definierter USP – relevant für Kund:innen
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video-Placeholder für später -->
+            <div class="card" style="margin-top: 1.6rem;">
+              <h3>Video-Demo (kommt noch)</h3>
+              <p class="muted">
+                Hier kann später ein kurzes Video eingebunden werden, das zeigt,
+                wie die Matego-Maschine funktioniert. Sobald die Datei bereit ist,
+                kann der Platzhalter unten ersetzt werden.
+              </p>
+              <video
+                controls
+                poster="Matego_Maschine.png"
+                style="width: 100%; border-radius: 16px; margin-top: 0.6rem; background:#000;"
+              >
+                <!-- Wenn ihr ein Video habt, legt es z.B. als matego-demo.mp4 ins Repo
+                     und tragt hier src="matego-demo.mp4" ein. -->
+                Ihr Browser unterstützt das Video-Element nicht.
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIRMA -->
+      <section id="firma">
+        <div class="container">
+          <div class="section-inner">
+            <div class="section-header">
+              <div class="eyebrow">Unternehmen</div>
+              <h2 class="section-title">Die Firma hinter Matego.</h2>
+              <p class="section-subtitle">
+                Wir sind ein kleines Startup aus Zürich, das Mate
+                zeitgemäß, bequem und nachhaltig machen will.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <div class="card">
+                  <h3>Firmensteckbrief</h3>
+                  <ul class="info-list">
+                    <li><strong>Name:</strong> Matego GmbH i.G.</li>
+                    <li><strong>Sitz:</strong> Zürich, Schweiz</li>
+                    <li><strong>Reichweite:</strong> national (geplant D-A-CH)</li>
+                    <li><strong>Rechtsform:</strong> GmbH – begrenztes Risiko, professionelles Auftreten</li>
+                  </ul>
+                  <div class="pill-row">
+                    <span class="pill">Mechanische Konsumgüter</span>
+                    <span class="pill">Getränkemarkt</span>
+                    <span class="pill">Kapselsystem</span>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <h3>Leitbild – Werte &amp; Ziele</h3>
+                  <p>
+                    Unser Leitbild basiert auf drei zentralen Werten:
+                  </p>
+                  <ul class="info-list">
+                    <li><strong>Nachhaltigkeit:</strong> Umweltfreundliche Kapseln, bewusste Produktion.</li>
+                    <li><strong>Einfachheit:</strong> Mate ohne Aufwand – auch für Einsteiger:innen.</li>
+                    <li><strong>Transparenz:</strong> Ehrliche Kommunikation von Kosten, Herkunft &amp; Wirkung.</li>
+                  </ul>
+                  <p class="mt-sm">
+                    <strong>Ziele:</strong> Markteintritt in der Schweiz, Aufbau
+                    eines stabilen Kapsel-Abos und Erweiterung auf weitere
+                    Geschmacksrichtungen und Modelle.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <h3>Team &amp; Struktur</h3>
+                  <ul class="info-list">
+                    <li><strong>CEO &amp; Entwicklung:</strong> Chris – Produktentwicklung, technische Konzeption, Koordination mit externen Produzenten.</li>
+                    <li><strong>Produktion &amp; Logistik:</strong> Silas – Beschaffung, externe Fertigung, Lager und Distribution.</li>
+                    <li><strong>Marketing &amp; Vertrieb:</strong> Kim – Online-Auftritt, Social Media, Kooperationen mit Händlern.</li>
+                  </ul>
+                  <p class="mt-sm">
+                    Die Führungsstruktur ist schlank gehalten: Die Geschäftsführung
+                    (CEO) verantwortet die Gesamtstrategie und arbeitet eng mit den
+                    Bereichen Entwicklung, Produktion und Marketing zusammen.
+                  </p>
+                </div>
+
+                <div class="card">
+                  <h3>Slogan &amp; Logo</h3>
+                  <p>
+                    <strong>Slogan:</strong> <em>„Mate neu gedacht.“</em>
+                  </p>
+                  <p>
+                    Das Logo kombiniert ein stilisiertes Mate-Blatt mit einer
+                    klaren Wortmarke „Matego“. Es symbolisiert die Verbindung von
+                    Natur (Mate) und moderner Technik (Maschine).
+                  </p>
+                  <p class="mt-sm muted">
+                    Unten das Logo, wie es auch im Header verwendet wird:
+                  </p>
+                  <img src="Matego_Logo.png" alt="Matego Logo" style="max-width: 200px; margin-top:0.5rem; border-radius:12px; background:#fefce8; box-shadow:0 8px 20px rgba(0,0,0,0.35);" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PREISKALKULATION -->
+      <section id="kalkulation">
+        <div class="container">
+          <div class="section-inner">
+            <div class="section-header">
+              <div class="eyebrow">Preiskalkulation</div>
+              <h2 class="section-title">So setzt sich unser Preis zusammen.</h2>
+              <p class="section-subtitle">
+                Transparente Übersicht über Materialkosten, Personalkosten,
+                Fixkosten und Break-Even-Point – wie im Excel berechnet.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <div class="card">
+                  <h3>Kostenarten &amp; Deckungsbeitrag</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Position</th>
+                        <th>Beschreibung</th>
+                        <th>Betrag (CHF)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Materialkosten / Stück</td>
+                        <td>Gehäuse, Heizelement, Elektronik, Leitungen</td>
+                        <td>45.–</td>
+                      </tr>
+                      <tr>
+                        <td>Lohnkosten / Stück</td>
+                        <td>Montage, Prüfung, Verpackung, Handling</td>
+                        <td>10.–</td>
+                      </tr>
+                      <tr>
+                        <td>Variable Kosten / Stück</td>
+                        <td>Material + Lohn</td>
+                        <td><strong>55.–</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Verkaufspreis / Stück</td>
+                        <td>Einführungspreis Matego One</td>
+                        <td><strong>129.–</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Deckungsbeitrag / Stück</td>
+                        <td>Verkaufspreis – variable Kosten</td>
+                        <td><strong>74.–</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p class="table-note">
+                    Die variablen Kosten decken die direkte Herstellung des
+                    Produktes. Der Deckungsbeitrag von CHF 74.– pro Stück steht zur
+                    Verfügung, um Fixkosten zu decken und Gewinn zu erzielen.
+                  </p>
+                </div>
+
+                <div class="card">
+                  <h3>Personalkosten &amp; Sachkosten</h3>
+                  <ul class="info-list">
+                    <li><strong>Personalkosten (jährlich):</strong> CHF 36’000.– (Teilzeit-Team, Entwicklung &amp; Koordination)</li>
+                    <li><strong>Miete &amp; Infrastruktur:</strong> CHF 12’000.–</li>
+                    <li><strong>Versicherungen &amp; Administration:</strong> CHF 4’000.–</li>
+                    <li><strong>Marketing &amp; Website:</strong> CHF 6’000.–</li>
+                  </ul>
+                  <p class="mt-sm">
+                    <strong>Fixkosten total / Jahr:</strong> CHF 58’000.–
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <h3>Break-Even-Point</h3>
+                  <p>
+                    Der Break-Even-Point zeigt, ab welcher Stückzahl die Fixkosten
+                    gedeckt sind und das Unternehmen Gewinn macht.
+                  </p>
+                  <ul class="info-list">
+                    <li><strong>Fixkosten / Jahr:</strong> CHF 58’000.–</li>
+                    <li><strong>Deckungsbeitrag / Stück:</strong> CHF 74.–</li>
+                    <li><strong>Break-Even-Menge:</strong> 58’000 / 74 ≈ 784 Stück/Jahr</li>
+                  </ul>
+                  <p class="price-highlight">
+                    ≈ 65 Stück pro Monat
+                    <span>ab da arbeiten wir profitabel</span>
+                  </p>
+                  <p class="mt-sm muted">
+                    Die genaue Berechnung ist in unserer Excel-Datei dokumentiert.
+                    Für das Schulprojekt kann hier ein Download-Link zur
+                    Preiskalkulation eingefügt werden (z.&nbsp;B.
+                    <em>Preiskalkulation_Matego.xlsx</em>).
+                  </p>
+                </div>
+
+                <div class="card">
+                  <h3>Preisbegründung</h3>
+                  <p>
+                    Der Verkaufspreis von CHF 129.– wurde gewählt, weil er:
+                  </p>
+                  <ul class="info-list">
+                    <li>die Herstell- und Personalkosten deckt,</li>
+                    <li>einen angemessenen Deckungsbeitrag erlaubt,</li>
+                    <li>für die Zielgruppe (15–40 Jahre, Mate-affin) attraktiv bleibt.</li>
+                  </ul>
+                  <p class="mt-sm">
+                    Da es kein direkt vergleichbares Produkt auf dem Markt gibt,
+                    orientieren wir uns an hochwertigen Kapsel-Kaffeemaschinen im
+                    Einstiegssegment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KONTAKT -->
+      <section id="kontakt">
+        <div class="container">
+          <div class="section-inner">
+            <div class="section-header">
+              <div class="eyebrow">Kontakt &amp; Vorbestellung</div>
+              <h2 class="section-title">Interesse an Matego?</h2>
+              <p class="section-subtitle">
+                Für Vorbestellungen, Fragen oder Feedback zur Mate-Maschine –
+                schreiben Sie uns direkt über das Formular.
+              </p>
+            </div>
+
+            <div class="contact-grid">
+              <div>
+                <form
+                  action="mailto:info@matego.ch"
+                  method="post"
+                  enctype="text/plain"
+                >
+                  <div class="form-row">
+                    <div class="form-field">
+                      <label for="name">Name</label>
+                      <input
+                        id="name"
+                        name="Name"
+                        type="text"
+                        placeholder="Ihr Name"
+                        required
+                      />
+                    </div>
+                    <div class="form-field">
+                      <label for="email">E-Mail</label>
+                      <input
+                        id="email"
+                        name="E-Mail"
+                        type="email"
+                        placeholder="name@example.ch"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label for="subject">Betreff</label>
+                    <input
+                      id="subject"
+                      name="Betreff"
+                      type="text"
+                      placeholder="z.B. Vorbestellung Matego One"
+                    />
+                  </div>
+                  <div class="form-field">
+                    <label for="message">Nachricht</label>
+                    <textarea
+                      id="message"
+                      name="Nachricht"
+                      placeholder="Ihre Nachricht an uns …"
+                      required
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Nachricht senden
+                  </button>
+                </form>
+                <p class="mt-md muted">
+                  Hinweis: Für das Schulprojekt reicht es, dass das Formular korrekt
+                  aufgebaut ist. Ob es produktiv E-Mails verschickt, ist nicht
+                  entscheidend – wichtig ist, dass die Interaktivität gezeigt wird.
+                </p>
+              </div>
+
+              <div class="contact-meta">
+                <div class="card">
+                  <h3>Direkte Kontaktangaben</h3>
+                  <p>
+                    <strong>E-Mail:</strong>
+                    <a href="mailto:info@matego.ch">info@matego.ch</a>
+                  </p>
+                  <p>
+                    <strong>Standort:</strong> Zürich, Schweiz
+                  </p>
+                  <p>
+                    <strong>Erreichbarkeit:</strong> Mo–Fr, 09:00–17:00 (Schulprojekt)
+                  </p>
+                  <p class="mt-sm muted">
+                    Für Rückfragen zum Projekt oder zu technischen Details stehen
+                    wir gerne zur Verfügung.
+                  </p>
+                </div>
+                <div class="card">
+                  <h3>Zielgruppe &amp; Marketing</h3>
+                  <p>
+                    Unsere primäre Zielgruppe sind Personen zwischen 15 und 40
+                    Jahren, die Mate trinken und eine schnelle, praktische Lösung
+                    für den Alltag suchen.
+                  </p>
+                  <ul class="info-list">
+                    <li>Social Media: Instagram, TikTok, Signal, Telegram</li>
+                    <li>Vertrieb über eigenen Onlineshop &amp; Elektronikhändler</li>
+                    <li>Kapsel-Abo als wiederkehrende Einnahmequelle</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMPRESSUM -->
+      <section id="impressum">
+        <div class="container">
+          <div class="section-inner">
+            <div class="section-header">
+              <div class="eyebrow">Impressum</div>
+              <h2 class="section-title">Rechtliche Angaben.</h2>
+              <p class="section-subtitle">
+                Schulprojekt „Shark Tank“ – fiktives Unternehmen für Ausbildungszwecke.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <div class="card">
+                  <h3>Unternehmen</h3>
+                  <p>
+                    <strong>Matego GmbH i.G.</strong><br />
+                    Weinbergstrasse 100<br />
+                    8006 Zürich<br />
+                    Schweiz
+                  </p>
+                  <p class="mt-sm">
+                    Vertretungsberechtigte Personen:
+                  </p>
+                  <ul class="info-list">
+                    <li>Chris – Geschäftsführung &amp; Entwicklung</li>
+                    <li>Silas – Produktion &amp; Logistik</li>
+                    <li>Kim – Marketing &amp; Vertrieb</li>
+                  </ul>
+                  <p class="mt-sm muted">
+                    Hinweis: Alle Angaben dienen ausschließlich dem Schulprojekt und
+                    stellen keine echte Firma dar.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <div class="card">
+                  <h3>Rechtlicher Hinweis</h3>
+                  <p>
+                    Dieses Projekt wurde im Rahmen des Unterrichts im
+                    Allgemeinbildenden Unterricht erstellt („Shark Tank“).
+                    Produkt, Firma und Preisgestaltung sind fiktiv, orientieren
+                    sich aber an realistischen wirtschaftlichen Überlegungen.
+                  </p>
+                  <p class="mt-sm muted">
+                    Inhalte, Bilder und Zahlen können für Präsentationen und
+                    Bewertungen verwendet werden, sind aber nicht als verbindliches
+                    Angebot zu verstehen.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            ©
+            <span class="highlight">Matego</span>
+            – Schulprojekt „Shark Tank“.
+          </div>
+          <div class="footer-links">
+            <a href="#hero">Nach oben</a>
+            <a href="#produkt">Produkt</a>
+            <a href="#firma">Firma</a>
+            <a href="#kalkulation">Preise</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
